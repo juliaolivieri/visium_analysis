@@ -6,12 +6,15 @@ All the Visium data I've downloaded is here: `/oak/stanford/groups/horence/Julia
 
 * `*.tif`: The histology image
 
-If BAM is available (as in https://www.10xgenomics.com/resources/datasets/mouse-brain-serial-section-2-sagittal-anterior-1-standard-1-1-0; see `/oak/stanford/groups/horence/JuliaO/data/visium/V1_Mouse_Brain_Sagittal_Posterior` for example downloaded data):
-* `*possorted_genome_bam.bam`: The BAM file. If this isn't present, 
+### If BAM is available
+As in https://www.10xgenomics.com/resources/datasets/mouse-brain-serial-section-2-sagittal-anterior-1-standard-1-1-0; see `/oak/stanford/groups/horence/JuliaO/data/visium/V1_Mouse_Brain_Sagittal_Posterior` for example downloaded data:
+* `*possorted_genome_bam.bam`: The BAM file. 
 * `spatial/tissue_positions_list.csv`: maps barcodes to spatial locations (described here: https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/output/images). 
 * `filtered_feature_bc_matrix/*`: Gives gene expression values to compare against. Should contain `barcodes.tsv.gz`, `features.tsv.gz`, and `matrix.mtx.gz`   
 
-If BAM is not available (as in https://www.biorxiv.org/content/10.1101/2021.08.03.455000v1.full.pdf; see `/oak/stanford/groups/horence/JuliaO/data/visium/brain_metastases` for example downloaded data):
+### If BAM is not available
+
+As in https://www.biorxiv.org/content/10.1101/2021.08.03.455000v1.full.pdf; see `/oak/stanford/groups/horence/JuliaO/data/visium/brain_metastases` for example downloaded data:
 * `*_L001_R{1,2}_001.fastq.gz`: R1 and R2 fastqs
 
 ## Step 2: Run spaceranger to get BAMs and spatial metadata
