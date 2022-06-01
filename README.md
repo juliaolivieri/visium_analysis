@@ -19,7 +19,9 @@ As in https://www.biorxiv.org/content/10.1101/2021.08.03.455000v1.full.pdf; see 
 
 ## Step 2: Run spaceranger to get BAMs and spatial metadata
 
-If the BAM was not available for the download, you need to run spaceranger to get the other required files. 
+If the BAM was not available for the download, you need to run spaceranger to get the other required files. Spaceranger is downloaded on sherlock here: `/home/groups/horence/applications/spaceranger-1.3.1/`.
+
+Example call to spaceranger in this repo: [`run_spaceranger.sh`](scripts/submissionscripts/run_spaceranger.sh)
 
 ## Step 3: Transform metadata into form required for SpliZ/ReadZS
 
