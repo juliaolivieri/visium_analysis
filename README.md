@@ -21,7 +21,32 @@ As in https://www.biorxiv.org/content/10.1101/2021.08.03.455000v1.full.pdf; see 
 
 If the BAM was not available for the download, you need to run spaceranger to get the other required files. Spaceranger is downloaded on sherlock here: `/home/groups/horence/applications/spaceranger-1.3.1/`.
 
+Example call to spaceranger count with input descriptions from https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/using/count#count
+
+```
+$ cd /home/jdoe/runs
+$ spaceranger count --id=sample345 \ #Output directory
+                   --transcriptome=/opt/refdata/GRCh38-2020-A \ #Path to Reference
+                   --fastqs=/home/jdoe/runs/HAWT7ADXX/outs/fastq_path \ #Path to FASTQs
+                   --sample=mysample \ #Sample name from FASTQ filename
+                   --image=/home/jdoe/runs/images/sample345.tiff \ #Path to brightfield image 
+                   --slide=V19J01-123 \ #Slide ID
+                   --area=A1 \ #Capture area
+                   --localcores=8 \ #Allowed cores in localmode
+                   --localmem=64 #Allowed memory (GB) in localmode 
+```
+
 Example call to spaceranger in this repo: [`run_spaceranger.sh`](scripts/submission_scripts/run_spaceranger.sh)
+
+The Reference was downloaded using this command:
+
+```
+curl -O https://cf.10xgenomics.com/supp/spatial-exp/refdata-gex-GRCh38-2020-A.tar.gz
+```
+
+The `slide` and `area` values should be available from wherever you downloaded the data. For example, see "visium gene expression slideserial number" in https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5420749.
+
+Once you run spaceranger, the required files from [Step 1](#Step-1:-Download-data) should be available in `outs/filtered_feature_bc_matrix/` and `outs/spatial/`.
 
 ## Step 3: Transform metadata into form required for SpliZ/ReadZS
 
