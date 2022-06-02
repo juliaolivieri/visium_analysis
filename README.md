@@ -48,6 +48,8 @@ The `slide` and `area` values should be available from wherever you downloaded t
 
 Once you run spaceranger, the required files from [Step 1](#Step-1:-Download-data) should be available in `outs/filtered_feature_bc_matrix/` and `outs/spatial/`.
 
+The 10X team are very helpful with debugging, so if you run into errors definitely email them.
+
 ## Step 3: Transform metadata into form required for SpliZ/ReadZS
 
 Use the notebook [`visium_meta_clean.ipynb`](notebooks/visium_meta_clean.ipynb) to create the metadata file. Change the following at the top of the notebook to match your data:
@@ -81,6 +83,14 @@ Columns in metadata file (some columns from `tissue_positions_list.csv` directly
 
 ## Step 4: Run SpliZ/ReadZS
 
+### ReadZS
+
+Visium data can be run using the main branch of the [ReadZS pipeline](https://github.com/salzmanlab/ReadZS) without modification. An example [config file](nextflow_inputs/visium_readzs.config), [samplesheet](nextflow_inputs/samplesheet_readzs.csv), and [bash script](nextflow_inputs/run_readzs.sh) are provided. 
+
+In the bash script, change `runName` to whatever you want. In the samplesheet, your sample name and its BAM (I haven't run with multiple visium samples with ReadZS, but I suppose that you could). In the config file, include the path to the samplesheet, metadatafile described in Step 3, and other [input files required for ReadZS](https://github.com/salzmanlab/ReadZS#input-arguments). 
+
+### SpliZ
+
 ## Step 5: Extract gene expression values for comparison
 
 ### By gene
@@ -97,3 +107,8 @@ Columns in metadata file (some columns from `tissue_positions_list.csv` directly
 
 ## Step 8: Plot genes of interest
 
+## References
+
+ReadZS
+
+SpliZ
