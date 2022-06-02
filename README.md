@@ -59,10 +59,10 @@ Use the notebook [`visium_meta_clean.ipynb`](notebooks/visium_meta_clean.ipynb) 
 Then run all the cells.
 
 Outputs:
-* `notebooks/output/visium_meta/<dataname>_blur.png`: Plot of the histology image blurred to the specified level (default: 70)
-* `notebooks/output/visium_meta/<dataname>_pixquant.png`: Plot of the pixel values from the blurred image, quantiled
-* `notebooks/output/visium_meta/<dataname>_pixval.png`: Plot of the raw pixel values from the blurred image
-* `notebooks/output/visium_meta/meta_<dataname>.tsv`: The metadata tsv file
+* [`notebooks/output/visium_meta/<dataname>_blur.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_blur.png): Plot of the histology image blurred to the specified level (default: 70)
+* [`notebooks/output/visium_meta/<dataname>_pixquant.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixquant.png): Plot of the pixel values from the blurred image, quantiled
+* [`notebooks/output/visium_meta/<dataname>_pixval.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixval.png): Plot of the raw pixel values from the blurred image
+* [`notebooks/output/visium_meta/meta_<dataname>.tsv`](notebooks/output/visium_meta/meta_V1_Mouse_Brain_Sagittal_Posterior.tsv): The metadata tsv file
 
 Columns in metadata file (some columns from `tissue_positions_list.csv` directly, see documentation here: https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/output/images):
 * `barcode`: Barcode that can be mapped to BAM barcode
