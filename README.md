@@ -50,6 +50,33 @@ Once you run spaceranger, the required files from [Step 1](#Step-1:-Download-dat
 
 ## Step 3: Transform metadata into form required for SpliZ/ReadZS
 
+Use the notebook [`visium_meta_clean.ipynb`](notebooks/visium_meta_clean.ipynb) to create the metadata file. Change the following at the top of the notebook to match your data:
+* `dataname`: Name to use when saving the output file
+* `cer_loc_name`: Path to the `tissue_positions_list.csv` file discussed in Step 1.
+* `im_path`: Path to the tif image
+* `filt_bc_name`: path to the filtered gene expression matrix discussed in Step 1.
+
+Then run all the cells.
+
+Outputs:
+* `notebooks/output/visium_meta/<dataname>_blur.png`: Plot of the histology image blurred to the specified level (default: 70)
+* `notebooks/output/visium_meta/<dataname>_pixquant.png`: Plot of the pixel values from the blurred image, quantiled
+* `notebooks/output/visium_meta/<dataname>_pixval.png`: Plot of the raw pixel values from the blurred image
+* `notebooks/output/visium_meta/meta_<dataname>.tsv`: The metadata tsv file
+
+Columns in metadata file (some columns from `tissue_positions_list.csv` directly, see documentation here: https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/output/images):
+* `barcode`: Barcode that can be mapped to BAM barcode
+* `in_tissue`: 1 if in the tissue, 0 if out. All should be 1 because we're subsetting to only spots in the tissue here.
+* `array_row`: The row coordinate of the spot in the array from 0 to 77. The array has 78 rows.
+* `array_col`: The column coordinate of the spot in the array. In order to express the orange crate arrangement of the spots, this column index uses even numbers from 0 to 126 for even rows, and odd numbers from 1 to 127 for odd rows. Notice then that each row (even or odd) has 64 spots.
+* `xcoord`: The row pixel coordinate of the center of the spot in the full resolution image.
+* `ycoord`: The column pixel coordinate of the center of the spot in the full resolution image.
+* `cell_id`: `<dataname>_<barcode[:-2]` (cutting off the `-1` at the end of the barcode; this should match up with names of cells in ReadZS/SpliZ)
+* `plot_xcoord`: `ycoord` (use for plotting to align with histology image)
+* `plot_ycoord`: `-xcoord` (use for plotting to align with histology image)
+* `pixval`: pixel value at the given spot (with blur)
+* `pixquant`: pixel quantile at the given spot (with blur; default is 10 quantiles)
+
 ## Step 4: Run SpliZ/ReadZS
 
 ## Step 5: Extract gene expression values for comparison
