@@ -58,6 +58,8 @@ Use the notebook [`visium_meta_clean.ipynb`](notebooks/visium_meta_clean.ipynb) 
 
 Then run all the cells.
 
+Note: sometimes I've found the images to be rotated according to what I'd expect. For example, you can see that [this pixel map](notebooks/output/visium_meta/p20190-s003_3_BrainMetastasis_pixval_mismatch.png) of a brain metastasis slide seems to be mismatched - the image is flipped relative to what we're plotting, so we're extracting the wrong pixel values from the image. You can flip around the blur matrix and transpose it until it [matches up with the histology](notebooks/output/visium_meta/p20190-s003_3_BrainMetastasis_pixval.png). You can also change the `plot_xcoord` and `plot_ycoord` columns to flip the image around so it matches the histology. I haven't found a programmatic way of knowing when this flip is happening.
+
 Outputs:
 * [`notebooks/output/visium_meta/<dataname>_blur.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_blur.png): Plot of the histology image blurred to the specified level (default: 70)
 * [`notebooks/output/visium_meta/<dataname>_pixquant.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixquant.png): Plot of the pixel values from the blurred image, quantiled
