@@ -95,6 +95,10 @@ The ReadZS pipeline creates a separate z score file for each chromosome. It's co
 
 ### SpliZ
 
+Visium data can be run using the main branch of the [SpliZ pipeline](https://github.com/salzmanlab/SpliZ) without modification. An example [config file](nextflow_inputs/visium_spliz.config), [samplesheet](nextflow_inputs/samplesheet_spliz.csv), and [bash script](nextflow_inputs/run_spliz.sh) are provided.
+
+Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPLIZVD` step finishes.
+
 ## Step 5: Extract gene expression values for comparison
 
 ### By gene
