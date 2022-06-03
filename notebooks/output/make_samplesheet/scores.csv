@@ -1,0 +1,14 @@
+name,col,genecol,cellid,valname
+SpliZ,scZ,gene,cell,spliz_vals
+SpliZVD1,svd_z0,gene,cell,spliz_vals
+SpliZVD2,svd_z1,gene,cell,spliz_vals
+SpliZVD3,svd_z2,gene,cell,spliz_vals
+ReadZS,z_scaled,window,cell_id,readzs_vals
+ReadZS_ge,frac_count,window,cell_id,readzs_ge
+ge,frac_count,gene,cell_id,ge_vals
+SpliZ_norm,scZ_norm,gene,cell,resid_spliz
+ge_norm,frac_count_norm,gene,cell,resid_spliz
+SpliZ_resid,res,gene,cell,resid_spliz
+ReadZS_norm,z_scaled_norm,window,cell_id,resid_readzs
+ReadZS_ge_norm,frac_count_norm,window,cell_id,resid_readzs
+ReadZS_resid,res,window,cell_id,resid_readzs

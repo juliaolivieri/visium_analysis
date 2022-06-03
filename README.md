@@ -99,7 +99,52 @@ Running the SpliZ pipeline is pretty much the same procedure as running the Read
 
 Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPLIZVD` step finishes.
 
+## Step 5: Make samplesheet
+
+Note that for the remaining code, rather than taking arguments for a bunch of input paths each time, I have all the paths saved in a csv that I access in each script. The access looks something like this: 
+
+```
+datanaame = "V1_Mouse_Brain_Sagittal_Posterior"
+samples = pd.read_csv("notebooks/output/make_samplesheet/spatial.csv",index_col = 0)
+row = samples.loc[dataname]
+
+score = "ReadZS"
+scores = pd.read_csv("output/make_samplesheet/scores.csv",index_col=0)
+srow = scores.loc[score]
+```
+
+I found this easier than having to manually copy the paths each time. Also, it's fine if all the metadata paths (for example) don't follow the same format between datasets, because I just have to put the correct path for each one into the samplesheet and then everything works smoothly. I think this is a good approach if there are a lot of datasets/scores you're iterating over, because it forces you to keep an up-to-date spreadsheet of where all the inputs/outputs are, and you can avoid copy/pasting paths. 
+
+The process of making this samplesheet is a little manual, since you have to write all the correct paths for all of your datasets. But you only have to do this once for each. I make the samplesheet in a [notebook](notebooks/make_samplesheet.ipynb). 
+
+The columns of the output of the [spatial file](notebooks/output/make_samplesheet/spatial.csv) are:
+* `dataname`:
+* `method`:
+* `spliz_vals`:
+* `readzs_vals`:
+* `ge_vals`:
+* `tissue`:
+* `image`:
+* `metadata`:
+* `pixcorr_ge`:
+* `pixcorr_readzs`:
+* `pixcorr_spliz`:
+* `readzs_ge`:
+* `resid_spliz`:
+* `resid_readzs`:
+* `bam`:
+* `tiss_pos_list`:
+* `ge_mat`:
+
+The column outputs of the [scores file](notebooks/output/make_samplesheet/scores.csv) are:
+* `name`:
+* `col`:
+* `genecol`:
+* `cellid`:
+* `valname`:
+
 ## Step 5: Extract gene expression values for comparison
+
 
 ### By gene
 
@@ -123,7 +168,7 @@ Meyer E, Dehghannasiri R, Chaung K, Salzman J. (2021).
 bioRxiv.
 https://doi.org/10.1101/2021.09.29.462469 
 
-<a id="2">[1]</a> 
+<a id="2">[2]</a> 
 Olivieri JE, Dehghannasiri R, Salzman J. (2022)
 [The SpliZ generalizes ‘Percent Spliced In’to reveal regulated splicing at single-cell resolution.](https://www.nature.com/articles/s41592-022-01400-x)
 Nature Methods. 19(3):307-10.
