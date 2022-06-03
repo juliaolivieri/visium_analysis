@@ -113,35 +113,35 @@ scores = pd.read_csv("output/make_samplesheet/scores.csv",index_col=0)
 srow = scores.loc[score]
 ```
 
-I found this easier than having to manually copy the paths each time. Also, it's fine if all the metadata paths (for example) don't follow the same format between datasets, because I just have to put the correct path for each one into the samplesheet and then everything works smoothly. I think this is a good approach if there are a lot of datasets/scores you're iterating over, because it forces you to keep an up-to-date spreadsheet of where all the inputs/outputs are, and you can avoid copy/pasting paths. 
+I found this easier than having to manually copy the paths each time. Also, it's fine if all the metadata paths (for example) don't follow the same format between datasets, because I just have to put the correct path for each one into the samplesheet and then everything works smoothly. I think this is a good approach if there are a lot of datasets/scores you're iterating over, because it forces you to keep an up-to-date spreadsheet of where all the inputs/outputs are, and you can avoid copy/pasting paths. Also, no need to put an entry in every cell; you can just put an empty string if you don't have the given file for the given dataset.
 
 The process of making this samplesheet is a little manual, since you have to write all the correct paths for all of your datasets. But you only have to do this once for each. I make the samplesheet in a [notebook](notebooks/make_samplesheet.ipynb). 
 
 The columns of the output of the [spatial file](notebooks/output/make_samplesheet/spatial.csv) are:
-* `dataname`:
-* `method`:
-* `spliz_vals`:
-* `readzs_vals`:
-* `ge_vals`:
-* `tissue`:
-* `image`:
-* `metadata`:
-* `pixcorr_ge`:
-* `pixcorr_readzs`:
-* `pixcorr_spliz`:
-* `readzs_ge`:
-* `resid_spliz`:
-* `resid_readzs`:
-* `bam`:
-* `tiss_pos_list`:
-* `ge_mat`:
+* `dataname`: identifier of data
+* `method`: visium or 10x
+* `spliz_vals`: path to the `sym_SVD_normdonor_S_0.1_z_0.0_b_5_r_0.01_subcol.tsv` file from the SpliZ pipeline (in `SpliZ_values`)
+* `readzs_vals`: path to the concatenated z score file from the [concat_zscore.sh script](bash_scripts/concat_zscore.sh)
+* `ge_vals`: path to parsed gene expression values (Step 6)
+* `tissue`: string identifying the tissue (e.g. "Brain")
+* `image`: path to the .tif image
+* `metadata`: path to the metadata file (described in Step 3)
+* `pixcorr_ge`: path to correlation of pixel value and gene expression (Step 8)
+* `pixcorr_readzs`: path to correlation of pixel value and ReadZS (Step 8)
+* `pixcorr_spliz`: path to correlation of pixel value and SpliZ (Step 8)
+* `readzs_ge`: path to Parsed ReadZS counts (Step 6)
+* `resid_spliz`: path to residual after removing gene expression for SpliZ (Step 7)
+* `resid_readzs`: path to residual after removing gene expression for ReadZS (Step 7)
+* `bam`: path to BAM file
+* `tiss_pos_list`: path to `tissue_positions_list.csv` described in step 1
+* `ge_mat`: path to the filtered gene expression matrix described in step 1
 
 The column outputs of the [scores file](notebooks/output/make_samplesheet/scores.csv) are:
-* `name`:
-* `col`:
-* `genecol`:
-* `cellid`:
-* `valname`:
+* `name`: name of the score (e.g. `SpliZ`)
+* `col`: column in the zscore file that contains this value (e.g. `scZ`)
+* `genecol`: either `gene` or `window`
+* `cellid`: Name of the cell column (`cell` or `cell_id`)
+* `valname`: name of column in `spatial.csv` file that contains zscores
 
 ## Step 5: Extract gene expression values for comparison
 
