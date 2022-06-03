@@ -116,12 +116,11 @@ srow = scores.loc[score]
 I found this easier than having to manually copy the paths each time. Also, it's fine if all the metadata paths (for example) don't follow the same format between datasets, because I just have to put the correct path for each one into the samplesheet and then everything works smoothly. I think this is a good approach if there are a lot of datasets/scores you're iterating over, because it forces you to keep an up-to-date spreadsheet of where all the inputs/outputs are, and you can avoid copy/pasting paths. Also, no need to put an entry in every cell; you can just put an empty string if you don't have the given file for the given dataset.
 
 The process of making this samplesheet is a little manual, since you have to write all the correct paths for all of your datasets. But you only have to do this once for each. I make the samplesheet in a [notebook](notebooks/make_samplesheet.ipynb). 
-
 The columns of the output of the [spatial file](notebooks/output/make_samplesheet/spatial.csv) are:
 * `dataname`: identifier of data
 * `method`: visium or 10x
 * `spliz_vals`: path to the `sym_SVD_normdonor_S_0.1_z_0.0_b_5_r_0.01_subcol.tsv` file from the SpliZ pipeline (in `SpliZ_values`)
-* `readzs_vals`: path to the concatenated z score file from the [concat_zscore.sh script](bash_scripts/concat_zscore.sh)
+* `readzs_vals`: path to the concatenated z score file from the [`concat_zscore.sh` script](bash_scripts/concat_zscore.sh)
 * `ge_vals`: path to parsed gene expression values (Step 6)
 * `tissue`: string identifying the tissue (e.g. "Brain")
 * `image`: path to the .tif image
@@ -135,6 +134,7 @@ The columns of the output of the [spatial file](notebooks/output/make_sampleshee
 * `bam`: path to BAM file
 * `tiss_pos_list`: path to `tissue_positions_list.csv` described in step 1
 * `ge_mat`: path to the filtered gene expression matrix described in step 1
+* `readzs_counts`: path to the raw ReadZS count file (output from the pipeline)
 
 The column outputs of the [scores file](notebooks/output/make_samplesheet/scores.csv) are:
 * `name`: name of the score (e.g. `SpliZ`)
@@ -143,10 +143,28 @@ The column outputs of the [scores file](notebooks/output/make_samplesheet/scores
 * `cellid`: Name of the cell column (`cell` or `cell_id`)
 * `valname`: name of column in `spatial.csv` file that contains zscores
 
-## Step 5: Extract gene expression values for comparison
-
+## Step 6: Extract gene expression values for comparison
 
 ### By gene
+
+We want to extract gene expression values for each gene so that we can extricate gene expression patterns from splicing patterns. The script [`parse_gene_expression.py`](scripts/parse_gene_expression.py) parses the gene expression matrix returned by spaceranger into a table that we can use in downstream analysis. The sbatch script [`run_ge.sh`](scripts/submission_scripts/run_ge.sh) submits the job for this step. 
+
+Input parameters:
+* `dataname`: Data name in the dataset samplesheet (Step 5)
+* `thresh`: Require more than `thresh` spots to have nonzero values for the gene for it to be reported.
+* `genes`: Genes to parse gene expression for. If blank, all will be parsed.
+* `norm`: Including the `--norm` tag returns values normalized by count in each cell. Otherwise values are just integer counts
+
+Outputs (one row per gene, spot pair):
+* `<dataname>.tsv`: table with all gene counts per cell and metadata
+* `<dataname>.pq`: parquet form of table
+* `<dataname>_sub_<thresh>.tsv`: table with gene counts per cell if the gene has a nonzero value in `> thresh` spots
+* `<dataname>_sub_<thresh>.pq`: parquet form of table
+
+Output columns not defined in the metadata:
+* `gene`: gene name
+* `ensembl`: ensembl id
+* `frac_count`: if norm: the number of counts mapping to this window in this spot, divided by the number of counts mapping to this spot; if not norm, just the number of counts mapping to this window in this spot.
 
 ### By window
 
