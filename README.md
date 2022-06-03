@@ -145,7 +145,7 @@ The column outputs of the [scores file](notebooks/output/make_samplesheet/scores
 
 ## Step 6: Extract gene expression values for comparison
 
-### By gene
+### By gene (for comparison with the SpliZ)
 
 We want to extract gene expression values for each gene so that we can extricate gene expression patterns from splicing patterns. The script [`parse_gene_expression.py`](scripts/parse_gene_expression.py) parses the gene expression matrix returned by spaceranger into a table that we can use in downstream analysis. The sbatch script [`run_ge.sh`](scripts/submission_scripts/run_ge.sh) submits the job for this step. 
 
@@ -166,7 +166,7 @@ Output columns not defined in the metadata:
 * `ensembl`: ensembl id
 * `frac_count`: if norm: the number of counts mapping to this window in this spot, divided by the number of counts mapping to this spot; if not norm, just the number of counts mapping to this window in this spot.
 
-### By window
+### By window (for comparison with the ReadZS)
 
 ## Step 6: Normalize data
 
