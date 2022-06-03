@@ -95,7 +95,7 @@ The ReadZS pipeline creates a separate z score file for each chromosome. It's co
 
 ### SpliZ
 
-Visium data can be run using the main branch of the [SpliZ pipeline](https://github.com/salzmanlab/SpliZ) without modification. An example [config file](nextflow_inputs/visium_spliz.config), [samplesheet](nextflow_inputs/samplesheet_spliz.csv), and [bash script](nextflow_inputs/run_spliz.sh) are provided.
+Running the SpliZ pipeline is pretty much the same procedure as running the ReadZS. Visium data can be run using the main branch of the [SpliZ pipeline](https://github.com/salzmanlab/SpliZ) without modification. An example [config file](nextflow_inputs/visium_spliz.config), [samplesheet](nextflow_inputs/samplesheet_spliz.csv), and [bash script](nextflow_inputs/run_spliz.sh) are provided.
 
 Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPLIZVD` step finishes.
 
@@ -117,6 +117,15 @@ Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPL
 
 ## References
 
-ReadZS
+<a id="1">[1]</a> 
+Meyer E, Dehghannasiri R, Chaung K, Salzman J. (2021).
+[ReadZS detects developmentally regulated RNA processing programs in single cell RNA-seq and defines subpopulations independent of gene expression.](https://www.biorxiv.org/content/10.1101/2021.09.29.462469v1.abstract)
+bioRxiv.
+https://doi.org/10.1101/2021.09.29.462469 
 
-SpliZ
+<a id="2">[1]</a> 
+Olivieri JE, Dehghannasiri R, Salzman J. (2022)
+[The SpliZ generalizes ‘Percent Spliced In’to reveal regulated splicing at single-cell resolution.](https://www.nature.com/articles/s41592-022-01400-x)
+Nature Methods. 19(3):307-10.
+https://doi.org/10.1038/s41592-022-01400-x
+
