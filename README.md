@@ -168,6 +168,27 @@ Output columns not defined in the metadata:
 
 ### By window (for comparison with the ReadZS)
 
+We want to extract gene expression values for each window so that we can compare with ReadZS patterns. The script [`readzs_ge.py`](scripts/readzs_ge.py) parses the count values from the ReadZS output for each window and turns them into a table we can use for downstream analysis. The sbatch script [`run_ge_readzs.sh`](scripts/submission_scripts/run_ge_readzs.sh) submits the job for this step.
+
+Input parameters:
+* `dataname`: Data name in the dataset samplesheet (Step 5)
+* `thresh`: Only report windows with expression in > `thresh` spots
+
+Output (one row per window, spot pair):
+* `<dataname>_readzs_ge_<thresh>.tsv`: table with all window counts per spot and metadata
+* `<dataname>_readzs_ge_<thresh>.pq`: parquet version of the table
+
+Output columns not defined in metadata:
+* `cell_id`: spot identification column
+* `chr`: chromosome
+* `pos`: position on chromosome
+* `strand`: strand on chromosome
+* `sample`: `dataname`
+* `window`: window identifier
+* `window_count`: The number of reads for the given window for the given cell
+* `cell_count`: The number of reads across all windows for the given spot
+* `frac_count`: `window_count` / `cell_count`
+
 ## Step 6: Normalize data
 
 ## Step 7: Identify spatial patterns

@@ -34,16 +34,21 @@ def main():
 
   # get the number of counts of each window
   df["window_count"] = df["window"].map(df.groupby("window")["count"].sum())
+  df.drop("count",axis=1,inplace=True)
+  
+  # now that we've summed values, we can drop duplicate cell/gene combos
+  df = df.drop_duplicates(["cell_id","window"])
 
-  # subset to windows with counts > thresh
-  df = df[df["window_count"] > args.thresh]
+  # subset to windows with number nonzero spots > thresh
+  vc = df["window"].value_counts()
+  df = df[df["window"].isin(vc[vc > args.thresh].index)]
   print("3 df",df.shape)
 
   # find the count across all windows for each cell
-  df["cell_count"] = df["cell_id"].map(df.groupby("cell_id")["count"].sum())
+  df["cell_count"] = df["cell_id"].map(df.groupby("cell_id")["window_count"].sum())
 
   # find the fraction of each window in each cell
-  df["frac_count"] = df["count"]/df["cell_count"]
+  df["frac_count"] = df["window_count"]/df["cell_count"]
 
   # merge with metadata
   meta = pd.read_csv(row["metadata"],sep="\t")
