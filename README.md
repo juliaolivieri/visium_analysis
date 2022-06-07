@@ -211,6 +211,9 @@ After normalization, we can see that these irregularities go away:
 
 ![SpliZ histogram normalized](notebooks/output/make_skew_plots/scZ_norm_hist.png)  ![gene expression histogram normalized](notebooks/output/make_skew_plots/frac_count_norm_hist.png)
 
+We can look at the plots of SpliZ vs gene expression, and compare to normalized SpliZ vs. normalized gene expression:
+
+![SpliZ vs gene expression](notebooks/output/make_skew_plots/scZ_frac_count_plot.png)  ![SpliZ vs gene expression normalized](notebooks/output/make_skew_plots/scZ_norm_frac_count_norm_plot.png)
 
 
 ## Step 7: Identify spatial patterns
