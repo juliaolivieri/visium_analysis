@@ -189,7 +189,19 @@ Output columns not defined in metadata:
 * `cell_count`: The number of reads across all windows for the given spot
 * `frac_count`: `window_count` / `cell_count`
 
-## Step 6: Normalize data
+## Step 7: Normalize data
+
+If we're interested in SpliZ/ReadZS patterns that are independent of gene expression, it can be helpful to "regress out" gene expression information to get scores with no ability to predict gene expression. We compute the residuals as follows:
+
+1. Normalize both SpliZ (or ReadZS) values and gene expression values so they are on the same scale
+2. Perform a linear regression to predict SpliZ (or ReadZS) value based on the gene expression value
+3. Subtract the predicted value from the observed value to get the "residual": the variation in the SpliZ unexplained by gene expression
+
+We can create this "normalized" version of the SpliZ, ReadZS, or gene expression scores by doing the following for each gene/window: 
+
+1. Rank all values from smallest to largest (ties are broken randomly, so the same value can get multiple ranks)
+2. Assign each rank to a uniform value between 0 and 1 (the value will be $\frac{r}{R + 1}$ where $r$ is the rank in question and $R$ is the max rank of the dataset)
+3. Use the reverse normal cdf to map each of these values to values from the normal distribution.
 
 ## Step 7: Identify spatial patterns
 
