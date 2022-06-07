@@ -203,6 +203,11 @@ We can create this "normalized" version of the SpliZ, ReadZS, or gene expression
 2. Assign each rank to a uniform value between 0 and 1 (the value will be $\frac{r}{R + 1}$ where $r$ is the rank in question and $R$ is the max rank of the dataset)
 3. Use the reverse normal cdf to map each of these values to values from the normal distribution.
 
+Normalization is important because the gene expression and SpliZ/ReadZS values can be on different scales, and can be skewed. For example, for the gene _Gng13_ the SpliZ and gene counts histograms are skewed before normalization:
+
+![SpliZ histogram](notebooks/output/make_skew_plots/scZ_hist.png)  ![gene expression histogram](notebooks/output/make_skew_plots/frac_count_hist.png)
+
+
 ## Step 7: Identify spatial patterns
 
 ### Pixel correlation
