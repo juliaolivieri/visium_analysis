@@ -215,6 +215,11 @@ We can look at the plots of SpliZ vs gene expression, and compare to normalized 
 
 ![SpliZ vs gene expression](notebooks/output/make_skew_plots/scZ_frac_count_plot.png)  ![SpliZ vs gene expression normalized](notebooks/output/make_skew_plots/scZ_norm_frac_count_norm_plot.png)
 
+Now here is the histogram for the residuals (after regressing out gene expression) and the plot of the SpliZ residual vs gene expression (you can see now the correlation between the two is zero):
+
+![residual histogram](notebooks/output/make_skew_plots/res_hist.png)  ![SpliZ residual vs gene expression normalized](notebooks/output/make_skew_plots/res_frac_count_norm_plot.png)
+
+
 
 ## Step 7: Identify spatial patterns
 
