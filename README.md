@@ -207,6 +207,11 @@ Normalization is important because the gene expression and SpliZ/ReadZS values c
 
 ![SpliZ histogram](notebooks/output/make_skew_plots/scZ_hist.png)  ![gene expression histogram](notebooks/output/make_skew_plots/frac_count_hist.png)
 
+After normalization, we can see that these irregularities go away:
+
+![SpliZ histogram normalized](notebooks/output/make_skew_plots/scZ_norm_hist.png)  ![gene expression histogram normalized](notebooks/output/make_skew_plots/frac_count_norm_hist.png)
+
+
 
 ## Step 7: Identify spatial patterns
 
