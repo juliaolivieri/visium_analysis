@@ -63,10 +63,10 @@ Then run all the cells.
 Note: sometimes I've found the images to be rotated according to what I'd expect. For example, you can see that [this pixel map](notebooks/output/visium_meta/p20190-s003_3_BrainMetastasis_pixval_mismatch.png) of a brain metastasis slide seems to be mismatched - the image is flipped relative to what we're plotting, so we're extracting the wrong pixel values from the image. You can flip around the blur matrix and transpose it until it [matches up with the histology](notebooks/output/visium_meta/p20190-s003_3_BrainMetastasis_pixval.png). You can also change the `plot_xcoord` and `plot_ycoord` columns to flip the image around so it matches the histology. I haven't found a programmatic way of knowing when this flip is happening.
 
 Outputs:
-* [`notebooks/output/visium_meta/<dataname>_blur.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_blur.png): Plot of the histology image blurred to the specified level (default: 70)
-* [`notebooks/output/visium_meta/<dataname>_pixquant.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixquant.png): Plot of the pixel values from the blurred image, quantiled
-* [`notebooks/output/visium_meta/<dataname>_pixval.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixval.png): Plot of the raw pixel values from the blurred image
-* [`notebooks/output/visium_meta/meta_<dataname>.tsv`](notebooks/output/visium_meta/meta_V1_Mouse_Brain_Sagittal_Posterior.tsv): The metadata tsv file
+* [`notebooks/output/visium_meta/{dataname}_blur.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_blur.png): Plot of the histology image blurred to the specified level (default: 70)
+* [`notebooks/output/visium_meta/{dataname}_pixquant.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixquant.png): Plot of the pixel values from the blurred image, quantiled
+* [`notebooks/output/visium_meta/{dataname}_pixval.png`](notebooks/output/visium_meta/V1_Mouse_Brain_Sagittal_Posterior_pixval.png): Plot of the raw pixel values from the blurred image
+* [`notebooks/output/visium_meta/meta_{dataname}.tsv`](notebooks/output/visium_meta/meta_V1_Mouse_Brain_Sagittal_Posterior.tsv): The metadata tsv file
 
 Columns in metadata file (some columns from `tissue_positions_list.csv` directly, see documentation here: https://support.10xgenomics.com/spatial-gene-expression/software/pipelines/latest/output/images):
 * `barcode`: Barcode that can be mapped to BAM barcode
@@ -75,7 +75,7 @@ Columns in metadata file (some columns from `tissue_positions_list.csv` directly
 * `array_col`: The column coordinate of the spot in the array. In order to express the orange crate arrangement of the spots, this column index uses even numbers from 0 to 126 for even rows, and odd numbers from 1 to 127 for odd rows. Notice then that each row (even or odd) has 64 spots.
 * `xcoord`: The row pixel coordinate of the center of the spot in the full resolution image.
 * `ycoord`: The column pixel coordinate of the center of the spot in the full resolution image.
-* `cell_id`: `<dataname>_<barcode[:-2]` (cutting off the `-1` at the end of the barcode; this should match up with names of cells in ReadZS/SpliZ)
+* `cell_id`: `{dataname}_{barcode[:-2]}` (cutting off the `-1` at the end of the barcode; this should match up with names of cells in ReadZS/SpliZ)
 * `plot_xcoord`: `ycoord` (use for plotting to align with histology image)
 * `plot_ycoord`: `-xcoord` (use for plotting to align with histology image)
 * `pixval`: pixel value at the given spot (with blur)
@@ -156,10 +156,10 @@ Input parameters:
 * `norm`: Including the `--norm` tag returns values normalized by count in each cell. Otherwise values are just integer counts
 
 Outputs (one row per gene, spot pair):
-* `<dataname>.tsv`: table with all gene counts per cell and metadata
-* `<dataname>.pq`: parquet form of table
-* `<dataname>_sub_<thresh>.tsv`: table with gene counts per cell if the gene has a nonzero value in `> thresh` spots
-* `<dataname>_sub_<thresh>.pq`: parquet form of table
+* `{dataname}.tsv`: table with all gene counts per cell and metadata
+* `{dataname}.pq`: parquet form of table
+* `{dataname}_sub_{thresh}.tsv`: table with gene counts per cell if the gene has a nonzero value in `> thresh` spots
+* `{dataname}_sub_{thresh}.pq`: parquet form of table
 
 Output columns not defined in the metadata:
 * `gene`: gene name
@@ -175,8 +175,8 @@ Input parameters:
 * `thresh`: Only report windows with expression in > `thresh` spots
 
 Output (one row per window, spot pair):
-* `<dataname>_readzs_ge_<thresh>.tsv`: table with all window counts per spot and metadata
-* `<dataname>_readzs_ge_<thresh>.pq`: parquet version of the table
+* `{dataname}_readzs_ge_{thresh}.tsv`: table with all window counts per spot and metadata
+* `{dataname}_readzs_ge_{thresh}.pq`: parquet version of the table
 
 Output columns not defined in metadata:
 * `cell_id`: spot identification column
@@ -220,6 +220,22 @@ Now here is the histogram for the residuals (after regressing out gene expressio
 ![residual histogram](notebooks/output/make_skew_plots/res_hist.png)  ![SpliZ residual vs gene expression normalized](notebooks/output/make_skew_plots/res_frac_count_norm_plot.png)
 
 
+The script that does all of this is [`save_residuals.py`](scripts/save_residuals.py). The script to submit the job is [`run_res.sh`](scripts/submission_scripts/run_res.sh).
+
+Input parameters:
+* `dataname`: Name to use when saving the output file
+* `score`: The score you're interested in (`SpliZ` or `ReadZS`)
+* `score2`: What you'll regress out of `score` (`ge` or `ReadZS_ge`)
+* `outname`: path to save output
+* `thresh`: Require > this many spots for the score to keep the given gene/window
+
+Output:
+* `{dataname}_{score}_{score2}_{thresh}.tsv`: One row per gene/spot pair
+
+Output columns not yet defined:
+* `res`: residual score after regressing `score2` out of `score`
+* `{score}_norm`: normalized version of `score`
+* `{score2}_norm`: normalized version of `score2`
 
 ## Step 7: Identify spatial patterns
 
