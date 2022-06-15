@@ -277,7 +277,9 @@ Note that if the scores are centered around 0 (which they are for the SpliZ and 
 
 [The traditional Ising model](https://www.stat.berkeley.edu/~mossel/teach/206af06/scribes/aug29.pdf) is discrete, with spots taking values of +1 or -1. Based on the configuration of spins, you can solve for the magnetism of the system (an indication of how "ordered" the system is). [Continuous-spin Ising models were introduced in 1969](https://aip.scitation.org/doi/abs/10.1063/1.1665005?journalCode=jmp). However, the theory to calculate the magnestism of the continuous system isn't straightforward. Also, a system would have high magnetism even if almost all the spots were the same, which isn't a configuration we're interested in. The Ising model [has been applied to biological problems before](https://www.sciencedirect.com/science/article/pii/S0002929707611409?via%3Dihub#bib4).
 
-Instead, to get p values I used permutations. I just permuted which scores were assigned to which spot for the given genes, and found how "extreme" the score we observed was compared to the permuted scores. Let the permuted Ising scores be $I_1, \ldots, I_P$. Then the permutation p value is $\frac{\sum_{i=1}^P \mathbb{I}(I_i > I)}{P}$. 
+Instead, to get p values I used permutations. I just permuted which scores were assigned to which spot for the given genes, and found how "extreme" the score we observed was compared to the permuted scores. Let the permuted Ising scores be $I_1, \ldots, I_P$. Then the permutation p value is:
+
+$$\frac{\sum_{i=1}^P \mathbb{I}(I_i > I)}{P}.$$ 
 
 The script that calculates these Ising values is [ising.py](scripts/ising.py). It can be submitted using [run_ising.sh](scripts/submission_scripts/run_ising.sh). 
 
