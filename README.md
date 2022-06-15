@@ -243,6 +243,28 @@ Output columns not yet defined:
 
 ### Pixel correlation
 
+One method of determining spatial regulation is to extract the information from the histology image and correlate that with SpliZ/ReadZS values. Specifically, we can extract the pixel value at each spot in the image (as described in step 3) and correlate pixel value with SpliZ/ReadZS value. We can also take this correlation with any function of the pixel value, such as the quantiled value. Nuclei are stained in the histology image, so there is some biological interpretability of the results.
+
+The script that performs this correlation is [pixel_correlation.py](scripts/pixel_correlation.py), and it can be submitted with [run_corr.sh](scripts/submission_scripts/run_corr.sh). 
+
+Input parameters:
+* `dataname`: Name to use when saving the output file
+* `thresh`: Only perform correlation for gene/window with non-NA values in > `thresh` spots
+* `score`: The score you're interested in correlating with the pixel value (`SpliZ` or `ReadZS`)
+* `outpath`: path to save output
+
+Output:
+* `{dataname}_{score}_{thresh}.tsv`: One row per gene/window
+
+Output columns not previously defined:
+* `num_spots`: Number of spots with non-NA values for this gene/window
+* `corr_pixval`: Spearman correlation of `score` with pixel value
+* `pval_pixval`: Spearman p value of `score` with pixel value
+* `corr_pixquant`: Spearman correlation of `score` with pixel quantile
+* `pval_pixquant`: Spearman p value of `score` with pixel quantile
+* `pval_pixval_adj`: Benjamini-Hochberg-corrected pixel value correlation p value
+* `pval_pixquant_adj`: Benjamini-Hochberg-corrected pixel quantile correlation p value
+
 ### Ising metric
 
 ## Step 8: Plot genes of interest
