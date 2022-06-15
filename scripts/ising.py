@@ -2,6 +2,7 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from statsmodels.stats.multitest import multipletests
 from tqdm import tqdm
 
 def get_args():
@@ -79,6 +80,7 @@ def main():
     out["num_pairs"].append(num_pairs)
 
   out = pd.DataFrame.from_dict(out)
-  out = out.sort_values("score_cont")
+  out = out.sort_values("perm_pval")
+  out["perm_pvals_adj"] = multipletests(out["perm_pval"],alpha=0.05,method="fdr_bh")[1]
   out.to_csv("{}{}_{}_{}_{}.tsv".format(outpath,args.dataname,args.score,args.thresh, args.num_perms),sep="\t",index=False)
 main()
