@@ -50,7 +50,7 @@ def main():
   
   vc = df[srow["genecol"]].value_counts()
   
-  out = {srow["genecol"] : [], "score_cont" : [], "num_pairs" : [], "perm_pval" : []}
+  out = {srow["genecol"] : [], "score_cont" : [], "num_pairs" : [], "perm_pval" : [], "mean_score" : []}
   for gene in tqdm(vc[vc > args.thresh].index):
     
     genedf = df[df[srow["genecol"]] == gene]
@@ -78,6 +78,7 @@ def main():
     out[srow["genecol"]].append(gene)
     out["score_cont"].append(dot_prod/num_pairs)
     out["num_pairs"].append(num_pairs)
+    out["mean_score"].append(genedf[srow["col"]].mean())
 
   out = pd.DataFrame.from_dict(out)
   out = out.sort_values("perm_pval")

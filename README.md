@@ -250,7 +250,7 @@ The script that performs this correlation is [pixel_correlation.py](scripts/pixe
 Input parameters:
 * `dataname`: Name to use when saving the output file
 * `thresh`: Only perform correlation for gene/window with non-NA values in > `thresh` spots
-* `score`: The score you're interested in correlating with the pixel value (`SpliZ` or `ReadZS`)
+* `score`: The score you're interested in correlating with the pixel value (e.g. `SpliZ` or `ReadZS`)
 * `outpath`: path to save output
 
 Output:
@@ -266,6 +266,37 @@ Output columns not previously defined:
 * `pval_pixquant_adj`: Benjamini-Hochberg-corrected pixel quantile correlation p value
 
 ### Ising metric
+
+Another method of finding spatial patterns is inspired by the Ising model of magnetism. The test is performed separately for each gene. 
+
+Let's define a graph $G$ on the visium spots with non-NA values for the given gene. Let the vertices of $G$ be the visium spots ($V = {1, ..., n}$) and edges $E$ be pairs of spots that are next to each other (note that we can define this graph structure aany way we want; we could allow a larger radius of spots to be considered "neighbors" by setting the `radius` variable in the script to be larger). Let $s_i$ be the score (e.g. SpliZ or ReadZS) of spot $i$. Then the Ising score $I$ is defined as follows:
+
+$$ I = \frac{\sum_{(i,j) \in E}s_is_j}{|E|}. $$
+
+Note that if the scores are centered around 0 (which they are for the SpliZ and ReadZS), then under the null hypothesis that the arrangement of the scores isn't spatially determined, $\mathbb{E}(I) = 0$. We can also do this for gene expression by using the normalized gene expression value described in Step 7). The larger $I$ is, the more likely it is that spots with the same score are close together. If the score is less than zero, it indicates a "reverse magnetism" between spots with similar scores.
+
+[The traditional Ising model](https://www.stat.berkeley.edu/~mossel/teach/206af06/scribes/aug29.pdf) is discrete, with spots taking values of +1 or -1. Based on the configuration of spins, you can solve for the magnetism of the system (an indication of how "ordered" the system is). [Continuous-spin Ising models were introduced in 1969](https://aip.scitation.org/doi/abs/10.1063/1.1665005?journalCode=jmp). However, the theory to calculate the magnestism of the continuous system isn't straightforward. Also, a system would have high magnetism even if almost all the spots were the same, which isn't a configuration we're interested in. The Ising model [has been applied to biological problems before](https://www.sciencedirect.com/science/article/pii/S0002929707611409?via%3Dihub#bib4).
+
+Instead, to get p values I used permutations. I just permuted which scores were assigned to which spot for the given genes, and found how "extreme" the score we observed was compared to the permuted scores. Let the permuted Ising scores be $I_1, \ldots, I_P$. Then the permutation p value is $\frac{\sum_{i=1}^P \mathbb{I}(I_i > I)}{P}$. 
+
+The script that calculates these Ising values is [ising.py](scripts/ising.py). It can be submitted using [run_ising.sh](scripts/submission_scripts/run_ising.sh). 
+
+Input parameters:
+* `dataname`: Name to use when saving the output file
+* `score`: The score you're interested in finding spatial patterns in (e.g. `SpliZ` or `ReadZS`)
+* `thresh`: Require > `thresh` spots to have non-NA values for `score`
+* `num_perms`: Number of permutations to perform
+
+Output:
+* `{dataname}_{score}_{thresh}_{num_perms}.tsv`: one row per gene/window
+
+Output columns not previously defined:
+* `score_cont`: Ising score for the gene/window
+* `num_pairs`: Number of spots neighboring each other with non-NA values for the gene/window
+* `perm_pval`: P value from permutations
+* `perm_pvals_adj`: P value from permutations adjusted with Benjamini-Hochberg
+* `mean_score`: The mean value of `score` for this gene/window
+
 
 ## Step 8: Plot genes of interest
 
