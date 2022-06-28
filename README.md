@@ -106,7 +106,7 @@ Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPL
 Note that for the remaining code, rather than taking arguments for a bunch of input paths each time, I have all the paths saved in a csv that I access in each script. The access looks something like this: 
 
 ```
-datanaame = "V1_Mouse_Brain_Sagittal_Posterior"
+dataname = "V1_Mouse_Brain_Sagittal_Posterior"
 samples = pd.read_csv("notebooks/output/make_samplesheet/spatial.csv",index_col = 0)
 row = samples.loc[dataname]
 

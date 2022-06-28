@@ -29,7 +29,7 @@ def main():
   # open both dataframes
   df = pd.read_csv(row[srow["valname"]],sep="\t")
 
-  radius = 150
+  radius = int(row["radius"])
   xcol = "plot_xcoord"
   ycol = "plot_ycoord"
   
