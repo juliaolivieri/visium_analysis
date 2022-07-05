@@ -84,4 +84,5 @@ def main():
   out = out.sort_values("perm_pval")
   out["perm_pvals_adj"] = multipletests(out["perm_pval"],alpha=0.05,method="fdr_bh")[1]
   out.to_csv("{}{}_{}_{}_{}.tsv".format(outpath,args.dataname,args.score,args.thresh, args.num_perms),sep="\t",index=False)
+  out[out["perm_pvals_adj"] < 0.05].sort_values("score_cont",ascending=False)[srow["genecol"]].to_csv("{}{}_{}_{}_{}_plot.txt".format(outpath,args.dataname,args.score,args.thresh, args.num_perms),index=False,header=None)
 main()

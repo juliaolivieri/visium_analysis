@@ -95,11 +95,23 @@ Note: It's okay if the ReadZS pipeline doesn't complete, as long as the `CALC_ZS
 
 The ReadZS pipeline creates a separate z score file for each chromosome. It's convenient for us to concatenate them into one file. You can use [the provided bash script](bash_scripts/concat_zscore.sh) to do this, by letting `ZDIR` be the path to the zscore directory from the ReadZS output, and `DATANAME` be your dataname (this determines the name the file will be saved with).
 
+The relevant file is the concatenated file created with this script, `{dataname}.zscore`. This contains one row per spot per 5000-bp window. Relevant columns are:
+
+* `window`: 5000-bp ReadZS window
+* `cell_id`: Spot identifier
+* `z_scaled`: ReadZS value
+
 ### SpliZ
 
 Running the SpliZ pipeline is pretty much the same procedure as running the ReadZS. Visium data can be run using the main branch of the [SpliZ pipeline](https://github.com/salzmanlab/SpliZ) without modification. An example [config file](nextflow_inputs/visium_spliz.config), [samplesheet](nextflow_inputs/samplesheet_spliz.csv), and [bash script](nextflow_inputs/run_spliz.sh) are provided.
 
 Note: It's okay if the SpliZ pipeline doesn't complete, as long as the `CALC_SPLIZVD` step finishes.
+
+The relevant SpliZ output file is `SpliZ_values/*_subcol.tsv`. This file has one row per gene per spot. The relevant columns are:
+
+* `gene`: gene name
+* `cell`: spot id
+* `scZ`: SpliZ value for that gene in that spot
 
 ## Step 5: Make samplesheet
 
