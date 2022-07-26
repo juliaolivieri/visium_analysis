@@ -314,7 +314,7 @@ Output columns not previously defined:
 
 ## Step 8: Plot genes of interest
 
-# Plot two scores and tissue
+### Plot two scores and tissue
 
 Once genes with significant spatial patterns for a score are determined, the next step is to visualize those patterns. To create a plot with the histology image, score1 values mapped to spot locations, and score2 values mapped to spot locations, you can use [plot_gene_val.py](scripts/plot_gene_val.py). It can be submitted using [run_spat_plot.sh](scripts/submission_scripts/run_spat_plot.sh). Example plot:
 
@@ -329,6 +329,8 @@ Input parameters:
 Output:
 * `{dataname}_{gene}_{score}_{score2}.png`: plot with three panels
 * `{dataname}_{gene}_{score}_{score2}_quant.png`: plot with three panels where the scores are quantiled (4 quantiles)
+
+### Peak plots
 
 ## References
 
