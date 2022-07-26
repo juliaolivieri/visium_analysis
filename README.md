@@ -318,7 +318,7 @@ Output columns not previously defined:
 
 Once genes with significant spatial patterns for a score are determined, the next step is to visualize those patterns. To create a plot with the histology image, score1 values mapped to spot locations, and score2 values mapped to spot locations, you can use [plot_gene_val.py](scripts/plot_gene_val.py). It can be submitted using [run_spat_plot.sh](scripts/submission_scripts/run_spat_plot.sh). Example plot:
 
-[example plot](V1_Mouse_Brain_Sagittal_Posterior_Myl6_SpliZ_norm_ge.png)
+![example plot](V1_Mouse_Brain_Sagittal_Posterior_Myl6_SpliZ_norm_ge.png)
 
 Input parameters:
 * `dataname`: Name to use when saving the output file/identifying data to plot
