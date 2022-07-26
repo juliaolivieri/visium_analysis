@@ -314,6 +314,22 @@ Output columns not previously defined:
 
 ## Step 8: Plot genes of interest
 
+# Plot two scores and tissue
+
+Once genes with significant spatial patterns for a score are determined, the next step is to visualize those patterns. To create a plot with the histology image, score1 values mapped to spot locations, and score2 values mapped to spot locations, you can use [plot_gene_val.py](scripts/plot_gene_val.py). It can be submitted using [run_spat_plot.sh](scripts/submission_scripts/run_spat_plot.sh). Example plot:
+
+[example plot](V1_Mouse_Brain_Sagittal_Posterior_Myl6_SpliZ_norm_ge.png)
+
+Input parameters:
+* `dataname`: Name to use when saving the output file/identifying data to plot
+* `score`: first score to plot (must be in: "ge","SpliZ","ReadZS","ReadZS_ge", "ReadZS_resid","ReadZS_norm","SpliZ_resid","SpliZ_norm","ReadZS_ge_norm","ge_norm")
+* `score2`: second score to plot (must be in: "ge","SpliZ","ReadZS","ReadZS_ge", "ReadZS_resid","ReadZS_norm","SpliZ_resid","SpliZ_norm","ReadZS_ge_norm","ge_norm")
+* `window_file`: file with no header, window on each line, saying which genes/windows to plot. It is pre-created for significant genes by the ising script (`*_plot.txt`).
+
+Output:
+* `{dataname}_{gene}_{score}_{score2}.png`: plot with three panels
+* `{dataname}_{gene}_{score}_{score2}_quant.png`: plot with three panels where the scores are quantiled (4 quantiles)
+
 ## References
 
 <a id="1">[1]</a> 

@@ -19,11 +19,23 @@ conda activate jup_env
 #DATANAME="V1_Mouse_Kidney"
 #DATANAME="10X_P1_1"
 
-DATANAME="p20190_s003_3_BrainMetastasis"
+#DATANAME="p20190_s003_3_BrainMetastasis"
+#DATANAME="p20190_s004_4_BrainMetastasis"
+#DATANAME="p20218_s001_L1"
+#DATANAME="p20218_s002_L2"
+#DATANAME="p20218_s003_L3"
+#DATANAME="p20218_s004_L4"
 
+#DATANAME="Visium_FFPE_Human_Breast_Cancer"
+#DATANAME="Visium_FFPE_Human_Normal_Prostate"
+#DATANAME="Visium_FFPE_Human_Prostate_Acinar_Cell_Carcinoma"
+#DATANAME="Visium_FFPE_Human_Prostate_Cancer"
+#DATANAME="Visium_FFPE_Human_Prostate_IF"
+#DATANAME="Visium_FFPE_Mouse_Brain"
+#DATANAME="Visium_FFPE_Mouse_Brain_IF"
+DATANAME="Visium_FFPE_Mouse_Kidney"
 
-THRESH=100
-
+THRESH=1000
 
 a="python ../readzs_ge.py --dataname ${DATANAME}  --thresh ${THRESH}"
 echo $a

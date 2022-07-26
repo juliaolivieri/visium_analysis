@@ -11,6 +11,7 @@ def get_args():
   parser.add_argument('--score', help="score to find residuals of",choices=["ge","SpliZ","ReadZS","ReadZS_ge", "ReadZS_resid","ReadZS_norm","SpliZ_resid","SpliZ_norm","ReadZS_ge_norm","ge_norm"])
   parser.add_argument('--thresh', type=int,help="minimum number of spots per window")
   parser.add_argument('--num_perms', type=int,help="number of permutations to perform per gene")
+  parser.add_argument('--suff',default="",help="append to end of save name")
 
   args = parser.parse_args()
   return args
@@ -83,6 +84,6 @@ def main():
   out = pd.DataFrame.from_dict(out)
   out = out.sort_values("perm_pval")
   out["perm_pvals_adj"] = multipletests(out["perm_pval"],alpha=0.05,method="fdr_bh")[1]
-  out.to_csv("{}{}_{}_{}_{}.tsv".format(outpath,args.dataname,args.score,args.thresh, args.num_perms),sep="\t",index=False)
-  out[out["perm_pvals_adj"] < 0.05].sort_values("score_cont",ascending=False)[srow["genecol"]].to_csv("{}{}_{}_{}_{}_plot.txt".format(outpath,args.dataname,args.score,args.thresh, args.num_perms),index=False,header=None)
+  out.to_csv("{}{}_{}_{}_{}{}.tsv".format(outpath,args.dataname,args.score,args.thresh, args.num_perms,args.suff),sep="\t",index=False)
+  out[out["perm_pvals_adj"] < 0.05].sort_values("score_cont",ascending=False)[srow["genecol"]].to_csv("{}{}_{}_{}_{}{}_plot.txt".format(outpath,args.dataname,args.score,args.thresh, args.num_perms,args.suff),index=False,header=None)
 main()

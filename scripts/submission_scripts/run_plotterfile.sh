@@ -13,14 +13,32 @@ conda deactivate
 conda activate jup_env
 date
 
+DATANAME="V1_Mouse_Brain_Sagittal_Posterior"
+#DATANAME="V1_Mouse_Brain_Sagittal_Posterior_Section_2"
+#DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
+#DATANAME="V1_Mouse_Brain_Sagittal_Anterior_Section_2"
 #DATANAME="V1_Mouse_Kidney"
-#DATANAME="V1_Mouse_Brain_Sagittal_Posterior"
-DATANAME="Visium_FFPE_Human_Breast_Cancer"
+#DATANAME="Visium_FFPE_Mouse_Brain"
+#DATANAME="Visium_FFPE_Mouse_Brain_IF"
 #DATANAME="Visium_FFPE_Mouse_Kidney"
-WINDOWFILE="windows_${DATANAME}.txt"
+GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.vM26.annotation.gff3"
 
-#GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.vM26.annotation.gff3"
-GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.v37.annotation.gff3 "
+#DATANAME="Visium_FFPE_Human_Breast_Cancer"
+#DATANAME="Visium_FFPE_Human_Normal_Prostate"
+#DATANAME="Visium_FFPE_Human_Prostate_Acinar_Cell_Carcinoma"
+#DATANAME="Visium_FFPE_Human_Prostate_Cancer"
+#DATANAME="Visium_FFPE_Human_Prostate_IF"
+#DATANAME="p20190_s003_3_BrainMetastasis"
+#DATANAME="p20190_s004_4_BrainMetastasis"
+#DATANAME="p20218_s001_L1"
+#DATANAME="p20218_s002_L2"
+#DATANAME="p20218_s003_L3"
+#DATANAME="p20218_s004_L4"
+#GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.v37.annotation.gff3 "
+
+
+WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_ReadZS_norm_100_100_plot.txt"
+
 
 a="python -u ../prep_plot.py --dataname ${DATANAME} --window_file ${WINDOWFILE}"
 echo $a
