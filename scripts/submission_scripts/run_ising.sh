@@ -12,7 +12,7 @@ date
 source ~/.bashrc
 conda activate jup_env
 
-#DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
+DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Anterior_Section_2"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior_Section_2"
@@ -32,7 +32,7 @@ conda activate jup_env
 #DATANAME="p20218_s001_L1"
 #DATANAME="p20218_s002_L2"
 #DATANAME="p20218_s003_L3"
-DATANAME="p20218_s004_L4"
+#DATANAME="p20218_s004_L4"
 #DATANAME="cta_ucsf-1-5_liver"
 
 
@@ -66,7 +66,7 @@ COL4="SpliZ_resid"
 a="python ../ising.py --dataname ${DATANAME} --score ${COL1}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
 b="python ../ising.py --dataname ${DATANAME} --score ${COL2}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
 c="python ../ising.py --dataname ${DATANAME} --score ${COL3}  --thresh ${THRESH} --num_perms ${NUMPERMS}"
-d="python ../ising.py --dataname ${DATANAME} --score ${COL4}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff"
+d="python ../ising.py --dataname ${DATANAME} --score ${COL4}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
 #e="python ../ising.py --dataname ${DATANAME} --score ${COL5}  --thresh ${THRESH} --num_perms ${NUMPERMS}"
 
 
@@ -76,8 +76,8 @@ eval $a
 echo $b
 eval $b
 
-#echo $c
-#eval $c
+echo $c
+eval $c
 #
 echo $d
 eval $d

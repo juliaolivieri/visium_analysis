@@ -332,6 +332,10 @@ Output:
 
 ### Peak plots
 
+## Useful commands
+
+To concatenate plot files into one: `cat V1*SpliZ_norm*b0_plot.txt | sort | uniq -u > joint_genes.txt`
+
 ## References
 
 <a id="1">[1]</a> 

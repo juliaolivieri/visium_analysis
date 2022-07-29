@@ -11,6 +11,8 @@ def get_args():
   parser.add_argument('--score', help="first score to plot",choices=["ge","SpliZ","ReadZS","ReadZS_ge", "ReadZS_resid","ReadZS_norm","SpliZ_resid","SpliZ_norm","ReadZS_ge_norm","ge_norm"])
   parser.add_argument('--score2', help="second score to plot",choices=["ge","SpliZ","ReadZS","ReadZS_ge", "ReadZS_resid","ReadZS_norm","SpliZ_resid","SpliZ_norm","ReadZS_ge_norm","ge_norm"])
   parser.add_argument('--window_file', help="file with no header, window on each line, saying which genes/windows to plot")
+  parser.add_argument('--suff', default="", help="suffix to save images with")
+
   args = parser.parse_args()
   return args
 
@@ -125,6 +127,6 @@ def main():
         except:
           axs[0].set_title("{} {} {}\n".format(args.dataname,suff,gene))
   
-        plt.savefig("{}{}_{}_{}_{}{}.png".format(outpath,args.dataname,gene,args.score,args.score2,suff),bbox_inches="tight")
+        plt.savefig("{}{}_{}_{}_{}{}{}.png".format(outpath,args.dataname,gene,args.score,args.score2,args.suff,suff),bbox_inches="tight")
         plt.show()
 main()

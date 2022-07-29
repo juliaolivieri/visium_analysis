@@ -1,4 +1,5 @@
 import argparse
+from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -16,6 +17,38 @@ def get_args():
   args = parser.parse_args()
   return args
 
+def get_perm_dist(df, srow, outdf):
+  # create null distribution for each pair of neighbors
+  perm_dist = defaultdict(lambda : [])
+  
+  prods = []
+  # loop over all genes
+  for gene, genedf in tqdm(df.groupby(srow["genecol"])):
+    
+    # get indicies of neighbors present for this gene
+    ind1 = outdf[(outdf["x_y1"].isin(genedf["x_y"])) & (outdf["x_y2"].isin(genedf["x_y"]))]["x_y1"]
+    ind2 = outdf[(outdf["x_y1"].isin(genedf["x_y"])) & (outdf["x_y2"].isin(genedf["x_y"]))]["x_y2"]
+  
+    # get score values for the first neighbor
+    pair1 = genedf.set_index("x_y").loc[list(ind1)][srow["col"]]
+    
+    # get score values for the second neighbor
+    pair2 = genedf.set_index("x_y").loc[list(ind2)][srow["col"]]
+  
+    # get the product of these two vectors (what will be summed to create the Ising score)
+    newind = ["{}:{}".format(x,y) for x, y in zip(pair1.index,pair2.index)]
+    pair1.index = newind
+    pair2.index = newind
+    prod = pair1.multiply(pair2)
+#    prods.append(prod)
+    
+    # save the product for each of these neighbors
+    for index, value in prod.items():
+      perm_dist[index].append(value)
+  
+  return perm_dist
+#  perm_dist_ser = pd.concat(prods)
+
 def main():
   outpath = "/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/"
   args = get_args()
@@ -29,6 +62,7 @@ def main():
 
   # open both dataframes
   df = pd.read_csv(row[srow["valname"]],sep="\t")
+
 
   radius = int(row["radius"])
   xcol = "plot_xcoord"
@@ -48,10 +82,13 @@ def main():
       out["x_y2"].append(max([row["x_y"],row2["x_y"]]))
   outdf = pd.DataFrame.from_dict(out)
   outdf = outdf.drop_duplicates()
-  
+
+   # pre compute values that will be used for the empirical null
+  perm_dist = get_perm_dist(df, srow, outdf)
+ 
   vc = df[srow["genecol"]].value_counts()
   
-  out = {srow["genecol"] : [], "score_cont" : [], "num_pairs" : [], "perm_pval" : [], "mean_score" : []}
+  out = {srow["genecol"] : [], "score_cont" : [], "num_pairs" : [], "perm_pval_emp" : [],"perm_pval" : [], "mean_score" : []}
   for gene in tqdm(vc[vc > args.thresh].index):
     
     genedf = df[df[srow["genecol"]] == gene]
@@ -66,9 +103,23 @@ def main():
     ind1 = outdf[(outdf["x_y1"].isin(genedf["x_y"])) & (outdf["x_y2"].isin(genedf["x_y"]))]["x_y1"]
     ind2 = outdf[(outdf["x_y1"].isin(genedf["x_y"])) & (outdf["x_y2"].isin(genedf["x_y"]))]["x_y2"]
     num_pairs = ind1.shape[0]
+
+     # get score values for the first neighbor
+    pair1 = genedf.set_index("x_y").loc[list(ind1)][srow["col"]]
     
+    # get score values for the second neighbor
+    pair2 = genedf.set_index("x_y").loc[list(ind2)][srow["col"]]
+  
+    # get the product of these two vectors (what will be summed to create the Ising score)
+    newind = ["{}:{}".format(x,y) for x, y in zip(pair1.index,pair2.index)]
+   
     # index by these indices and then take the dot product
-    dot_prod = np.dot(genedf.set_index("x_y").loc[list(ind1)][srow["col"]],genedf.set_index("x_y").loc[list(ind2)][srow["col"]])
+    dot_prod = np.dot(pair1,pair2)
+
+    # calculate empirical p value
+    perm_dot_prods1 = []
+    for i in range(args.num_perms):
+      perm_dot_prods1.append(sum([np.random.choice(perm_dist[x]) for x in newind]))    
 
     # permute the spot locations and take the dot product num_perm times
     perm_dot_prods = []
@@ -76,6 +127,8 @@ def main():
       genedf["perm"] = np.random.permutation(genedf[srow["col"]])
       perm_dot_prods.append(np.dot(genedf.set_index("x_y").loc[list(ind1)]["perm"],genedf.set_index("x_y").loc[list(ind2)]["perm"]))
     out["perm_pval"].append(len([x for x in perm_dot_prods if x > dot_prod])/args.num_perms)
+    out["perm_pval_emp"].append(len([x for x in perm_dot_prods1 if x > dot_prod])/args.num_perms)
+  
     out[srow["genecol"]].append(gene)
     out["score_cont"].append(dot_prod/num_pairs)
     out["num_pairs"].append(num_pairs)
@@ -84,6 +137,8 @@ def main():
   out = pd.DataFrame.from_dict(out)
   out = out.sort_values("perm_pval")
   out["perm_pvals_adj"] = multipletests(out["perm_pval"],alpha=0.05,method="fdr_bh")[1]
+  out["perm_pvals_emp_adj"] = multipletests(out["perm_pval_emp"],alpha=0.05,method="fdr_bh")[1]
+
   out.to_csv("{}{}_{}_{}_{}{}.tsv".format(outpath,args.dataname,args.score,args.thresh, args.num_perms,args.suff),sep="\t",index=False)
   out[out["perm_pvals_adj"] < 0.05].sort_values("score_cont",ascending=False)[srow["genecol"]].to_csv("{}{}_{}_{}_{}{}_plot.txt".format(outpath,args.dataname,args.score,args.thresh, args.num_perms,args.suff),index=False,header=None)
 main()
