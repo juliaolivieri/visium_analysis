@@ -338,8 +338,14 @@ Output:
 
 ## Useful commands
 
+To copy over Table 2: `scp jolivier@login.sherlock.stanford.edu:/oak/stanford/groups/horence/JuliaO/visium_analysis/notebooks/output/make_tables/spatial_table2.tsv .`
 To concatenate plot files into one: `cat V1*SpliZ_norm*b0_plot.txt | sort | uniq -u > joint_genes.txt`
 
+## Notebooks/scripts used for paper analysis
+
+* `make_overview_table.ipynb`: used to make table 1
+* `make_tables.ipynb`: used to make table 2
+* `analyze_ising.ipynb`: make correlation plots
 ## References
 
 <a id="1">[1]</a> 
