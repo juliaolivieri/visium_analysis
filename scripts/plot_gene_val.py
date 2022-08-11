@@ -19,7 +19,7 @@ def get_args():
 def main():
   args = get_args()
   print("got args")
-  outpath = "../output/plot_val_ge/"
+  outpath = "../output/plot_gene_val/"
 
   windows = list(pd.read_csv(args.window_file,header=None)[0]) 
   print(windows)

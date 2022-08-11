@@ -83,13 +83,17 @@ def main():
   outdf = pd.DataFrame.from_dict(out)
   outdf = outdf.drop_duplicates()
 
-   # pre compute values that will be used for the empirical null
+  # subset to only genes that meet threshold
+  vc = df[srow["genecol"]].value_counts()
+  df = df[df[srow["genecol"]].isin(vc[vc > args.thresh].index)]
+
+  # pre-compute values that will be used for the empirical null
   perm_dist = get_perm_dist(df, srow, outdf)
  
-  vc = df[srow["genecol"]].value_counts()
   
+  # loop over all genes / windows
   out = {srow["genecol"] : [], "score_cont" : [], "num_pairs" : [], "perm_pval_emp" : [],"perm_pval" : [], "mean_score" : []}
-  for gene in tqdm(vc[vc > args.thresh].index):
+  for gene, genedf in df.groupby(srow["genecol"]):
     
     genedf = df[df[srow["genecol"]] == gene]
     

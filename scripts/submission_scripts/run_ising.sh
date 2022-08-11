@@ -12,7 +12,7 @@ date
 source ~/.bashrc
 conda activate jup_env
 
-DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
+#DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Anterior_Section_2"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior_Section_2"
@@ -32,7 +32,7 @@ DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #DATANAME="p20218_s001_L1"
 #DATANAME="p20218_s002_L2"
 #DATANAME="p20218_s003_L3"
-#DATANAME="p20218_s004_L4"
+DATANAME="p20218_s004_L4"
 #DATANAME="cta_ucsf-1-5_liver"
 
 
@@ -47,18 +47,21 @@ DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #SCORE="ReadZS_ge_norm"
 #SCORE="ReadZS"
 #SCORE="ReadZS_resid"
-THRESH=100
-NUMPERMS=100
 
 #COL1="ReadZS"
 #COL2="ReadZS_norm"
 #COL3="ReadZS_ge_norm"
 #COL4="ReadZS_resid"
+#THRESH=1000
+#NUMPERMS=100
+
 
 COL1="SpliZ"
 COL2="SpliZ_norm"
 COL3="ge_norm"
 COL4="SpliZ_resid"
+THRESH=100
+NUMPERMS=100
 
 #COL5="ReadZS_ge"
 
@@ -78,7 +81,7 @@ eval $b
 
 echo $c
 eval $c
-#
+
 echo $d
 eval $d
 
