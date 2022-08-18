@@ -18,6 +18,8 @@ def get_args():
   return args
 
 def get_perm_dist(df, srow, outdf):
+  prod_df = pd.DataFrame(columns = outdf["x_y1"] + ":" + outdf["x_y2"],index=df[srow["genecol"]].unique())
+
   # create null distribution for each pair of neighbors
   perm_dist = defaultdict(lambda : [])
   
@@ -40,13 +42,14 @@ def get_perm_dist(df, srow, outdf):
     pair1.index = newind
     pair2.index = newind
     prod = pair1.multiply(pair2)
+    prod_df.loc[gene,newind] = prod
 #    prods.append(prod)
     
     # save the product for each of these neighbors
     for index, value in prod.items():
       perm_dist[index].append(value)
   
-  return perm_dist
+  return perm_dist, prod_df
 #  perm_dist_ser = pd.concat(prods)
 
 def main():
@@ -88,7 +91,7 @@ def main():
   df = df[df[srow["genecol"]].isin(vc[vc > args.thresh].index)]
 
   # pre-compute values that will be used for the empirical null
-  perm_dist = get_perm_dist(df, srow, outdf)
+  perm_dist, prod_df = get_perm_dist(df, srow, outdf)
  
   
   # loop over all genes / windows
@@ -121,17 +124,23 @@ def main():
     dot_prod = np.dot(pair1,pair2)
 
     # calculate empirical p value
-    perm_dot_prods1 = []
-    for i in range(args.num_perms):
-      perm_dot_prods1.append(sum([np.random.choice(perm_dist[x]) for x in newind]))    
+#    perm_dot_prods1 = []
+#    for i in range(args.num_perms):
+#      perm_dot_prods1.append(sum([np.random.choice(perm_dist[x]) for x in newind]))    
 
-    # permute the spot locations and take the dot product num_perm times
+    # calculate empirical p value
+    # subset to only edges present for this gene
+    # for each column, randomly choose a value num_perms times (skipping NAs)
+    # sum the values across each permutation
+    perm_dot_prods3 = list(prod_df[newind].apply(lambda x: np.random.choice(x.dropna(),args.num_perms), axis=0).sum(axis=1))
+
+    # permute the spot locations and take the dot product num_perm times (non-empirical p value)
     perm_dot_prods = []
     for i in range(args.num_perms):
       genedf["perm"] = np.random.permutation(genedf[srow["col"]])
       perm_dot_prods.append(np.dot(genedf.set_index("x_y").loc[list(ind1)]["perm"],genedf.set_index("x_y").loc[list(ind2)]["perm"]))
     out["perm_pval"].append(len([x for x in perm_dot_prods if x > dot_prod])/args.num_perms)
-    out["perm_pval_emp"].append(len([x for x in perm_dot_prods1 if x > dot_prod])/args.num_perms)
+    out["perm_pval_emp"].append(len([x for x in perm_dot_prods3 if x > dot_prod])/args.num_perms)
   
     out[srow["genecol"]].append(gene)
     out["score_cont"].append(dot_prod/num_pairs)
