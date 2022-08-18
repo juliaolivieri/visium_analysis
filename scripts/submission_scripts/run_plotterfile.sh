@@ -37,7 +37,7 @@ GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.vM26.annotation.gff3
 #GFF="/oak/stanford/groups/horence/kaitlin/ref_files/gencode.v37.annotation.gff3 "
 
 
-WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_ReadZS_norm_100_100_plot.txt"
+WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_ReadZS_norm_1000_100_b0_plot.txt "
 
 
 a="python -u ../prep_plot.py --dataname ${DATANAME} --window_file ${WINDOWFILE}"
