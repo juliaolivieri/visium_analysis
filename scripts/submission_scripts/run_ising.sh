@@ -3,7 +3,7 @@
 #SBATCH --job-name=ising
 #SBATCH --output=../job_output/ising.%j.out
 #SBATCH --error=../job_output/ising.%j.err
-#SBATCH --time=24:00:00
+#SBATCH --time=48:00:00
 #SBATCH -p owners,horence,quake
 #SBATCH --nodes=1
 #SBATCH --mem=20G
@@ -12,7 +12,7 @@ date
 source ~/.bashrc
 conda activate jup_env
 
-#DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
+DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Anterior_Section_2"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior_Section_2"
@@ -32,7 +32,7 @@ conda activate jup_env
 #DATANAME="p20218_s001_L1"
 #DATANAME="p20218_s002_L2"
 #DATANAME="p20218_s003_L3"
-DATANAME="p20218_s004_L4"
+#DATANAME="p20218_s004_L4"
 #DATANAME="cta_ucsf-1-5_liver"
 
 
@@ -48,33 +48,33 @@ DATANAME="p20218_s004_L4"
 #SCORE="ReadZS"
 #SCORE="ReadZS_resid"
 
-#COL1="ReadZS"
-#COL2="ReadZS_norm"
-#COL3="ReadZS_ge_norm"
-#COL4="ReadZS_resid"
-#THRESH=1000
-#NUMPERMS=100
+COL1="ReadZS"
+COL2="ReadZS_norm"
+COL3="ReadZS_ge_norm"
+COL4="ReadZS_resid"
+THRESH=1000
+NUMPERMS=1000
 
 
-COL1="SpliZ"
-COL2="SpliZ_norm"
-COL3="ge_norm"
-COL4="SpliZ_resid"
-THRESH=100
-NUMPERMS=100
+#COL1="SpliZ"
+#COL2="SpliZ_norm"
+#COL3="ge_norm"
+#COL4="SpliZ_resid"
+#THRESH=100
+#NUMPERMS=1000
 
 #COL5="ReadZS_ge"
 
 
-a="python ../ising.py --dataname ${DATANAME} --score ${COL1}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
-b="python ../ising.py --dataname ${DATANAME} --score ${COL2}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
-c="python ../ising.py --dataname ${DATANAME} --score ${COL3}  --thresh ${THRESH} --num_perms ${NUMPERMS}"
-d="python ../ising.py --dataname ${DATANAME} --score ${COL4}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
+a="python -u ../ising.py --dataname ${DATANAME} --score ${COL1}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
+b="python -u ../ising.py --dataname ${DATANAME} --score ${COL2}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
+c="python -u ../ising.py --dataname ${DATANAME} --score ${COL3}  --thresh ${THRESH} --num_perms ${NUMPERMS}"
+d="python -u ../ising.py --dataname ${DATANAME} --score ${COL4}  --thresh ${THRESH} --num_perms ${NUMPERMS} --suff _b0"
 #e="python ../ising.py --dataname ${DATANAME} --score ${COL5}  --thresh ${THRESH} --num_perms ${NUMPERMS}"
 
 
-echo $a
-eval $a
+#echo $a
+#eval $a
 
 echo $b
 eval $b
@@ -82,8 +82,8 @@ eval $b
 echo $c
 eval $c
 
-echo $d
-eval $d
+#echo $d
+#eval $d
 
 #echo $e
 #eval $e

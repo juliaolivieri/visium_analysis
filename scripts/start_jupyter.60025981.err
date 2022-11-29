@@ -1,0 +1,2 @@
+sbatch: error: Unable to open file /home/users/jolivier/start_jupyter.sbatch
+slurmstepd: error: *** JOB 60025981 ON sh02-17n41 CANCELLED AT 2022-08-09T20:43:19 DUE TO PREEMPTION ***

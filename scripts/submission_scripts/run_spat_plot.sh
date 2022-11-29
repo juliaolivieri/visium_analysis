@@ -12,7 +12,7 @@
 #DATANAME="V1_Mouse_Brain_Sagittal_Posterior_Section_2"
 #DATANAME="V1_Mouse_Brain_Sagittal_Anterior"
 #DATANAME="V1_Mouse_Brain_Sagittal_Anterior_Section_2"
-DATANAME="V1_Mouse_Kidney"
+#DATANAME="V1_Mouse_Kidney"
 #DATANAME="Visium_FFPE_Mouse_Brain"
 #DATANAME="Visium_FFPE_Mouse_Brain_IF"
 #DATANAME="Visium_FFPE_Mouse_Kidney"
@@ -27,17 +27,21 @@ DATANAME="V1_Mouse_Kidney"
 #DATANAME="p20218_s001_L1"
 #DATANAME="p20218_s002_L2"
 #DATANAME="p20218_s003_L3"
-#DATANAME="p20218_s004_L4"
+DATANAME="p20218_s004_L4"
 
 
-#SCORE="ReadZS"
-#SCORE2="ReadZS_ge"
-#WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_ReadZS_norm_100_100_plot.txt"
+SCORE="ReadZS_norm"
+SCORE2="ReadZS_ge_norm"
+#WINDOWFILE="windows.txt"
+WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/notebooks/output/analyze_ising/ReadZS_norm_ReadZS_ge_norm_interest_tumor.txt"
+##WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_ReadZS_norm_1000_100_plot.txt"
+#WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/notebooks/output/analyze_ising/ReadZS_norm_ReadZS_ge_norm_interest.txt"
 
-SCORE="SpliZ_norm"
-SCORE2="ge_norm"
+#SCORE="SpliZ_norm"
+#SCORE2="ge_norm"
+#WINDOWFILE="genes.txt"
 #WINDOWFILE="/oak/stanford/groups/horence/JuliaO/visium_analysis/scripts/output/ising/${DATANAME}_SpliZ_norm_100_100_b0_plot.txt"
-WINDOWFILE="../output/ising/joint_genes.txt"
+#WINDOWFILE="../output/ising/joint_genes.txt"
 
 
 

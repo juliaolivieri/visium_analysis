@@ -1,0 +1,103 @@
+sbatch: error: Unable to open file /home/users/jolivier/start_jupyter.sbatch
+[W 07:33:34.704 NotebookApp] Error loading server extension jupyter_nbextensions_configurator
+    Traceback (most recent call last):
+      File "/home/groups/horence/applications/anaconda3/lib/python3.8/site-packages/notebook/notebookapp.py", line 2033, in init_server_extensions
+        mod = importlib.import_module(modulename)
+      File "/home/groups/horence/applications/anaconda3/lib/python3.8/importlib/__init__.py", line 127, in import_module
+        return _bootstrap._gcd_import(name[level:], package, level)
+      File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+      File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+      File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+    ModuleNotFoundError: No module named 'jupyter_nbextensions_configurator'
+[W 2022-08-18 07:33:37.901 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-08-18 07:33:37.902 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-08-18 07:33:37.902 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-08-18 07:33:37.902 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2022-08-18 07:33:37.907 LabApp] JupyterLab extension loaded from /home/groups/horence/applications/anaconda3/lib/python3.8/site-packages/jupyterlab
+[I 2022-08-18 07:33:37.907 LabApp] JupyterLab application directory is /home/groups/horence/applications/anaconda3/share/jupyter/lab
+[I 07:33:37.912 NotebookApp] Serving notebooks from local directory: /oak/stanford/groups/horence/JuliaO
+[I 07:33:37.912 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 07:33:37.912 NotebookApp] http://localhost:34223/
+[I 07:33:37.913 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 07:42:44.863 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[W 07:42:45.292 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 73.840000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[I 07:42:46.156 NotebookApp] Kernel started: faf1a007-4997-4ecf-8219-b1cb5de5d876, name: jup_env
+[W 07:42:47.080 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 1.710000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:43:47.721 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[W 07:43:47.956 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.350000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[I 07:43:48.154 NotebookApp] Kernel started: 5fedb3ec-ec8f-41b3-b887-1637f60931bd, name: jup_env
+[W 07:43:48.192 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 0.850000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[I 07:44:45.840 NotebookApp] Saving file at /visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:44:45.840 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[I 07:45:48.267 NotebookApp] Saving file at /visium_analysis/notebooks/make_tables.ipynb
+[W 07:45:48.267 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[I 07:47:39.225 NotebookApp] Starting buffering for faf1a007-4997-4ecf-8219-b1cb5de5d876:dd93cb39d2f84534a1f2e4ec95afdf61
+[I 07:47:39.225 NotebookApp] Starting buffering for 5fedb3ec-ec8f-41b3-b887-1637f60931bd:10796af597cd46a58b9573f85014efd9
+[W 07:50:37.662 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[W 07:50:38.019 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.200000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:50:38.455 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 0.710000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[I 07:51:35.403 NotebookApp] Starting buffering for faf1a007-4997-4ecf-8219-b1cb5de5d876:b4b75c0f9d93465c89e5fc6d27679d5f
+[W 07:51:35.681 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[W 07:51:35.937 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 1.880000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:51:36.561 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 0.720000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:52:59.001 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[W 07:52:59.238 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.040000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[W 07:52:59.521 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 0.810000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[I 07:53:38.222 NotebookApp] Saving file at /visium_analysis/notebooks/make_samplesheet.ipynb
+[W 07:53:38.223 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[I 07:55:52.108 NotebookApp] Starting buffering for faf1a007-4997-4ecf-8219-b1cb5de5d876:9b971eb4d5a94314bc1eb3d440b636ac
+[I 07:55:52.109 NotebookApp] Starting buffering for 5fedb3ec-ec8f-41b3-b887-1637f60931bd:36f1ce5a96234a27b366dffd6843e306
+[I 08:07:07.636 NotebookApp] Saving file at /visium_analysis/notebooks/make_samplesheet.ipynb
+[W 08:07:07.636 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[W 08:07:08.895 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[W 08:07:08.909 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.460000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_samplesheet.ipynb
+[W 08:07:56.940 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[W 08:07:57.151 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 1.410000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[W 08:07:57.459 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 0.800000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/make_tables.ipynb
+[I 08:09:10.782 NotebookApp] Saving file at /visium_analysis/notebooks/make_samplesheet.ipynb
+[W 08:09:10.783 NotebookApp] Notebook visium_analysis/notebooks/make_samplesheet.ipynb is not trusted
+[I 08:09:57.603 NotebookApp] Saving file at /visium_analysis/notebooks/make_tables.ipynb
+[W 08:09:57.604 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[I 08:11:58.634 NotebookApp] Saving file at /visium_analysis/notebooks/make_tables.ipynb
+[W 08:11:58.635 NotebookApp] Notebook visium_analysis/notebooks/make_tables.ipynb is not trusted
+[I 08:16:22.493 NotebookApp] Starting buffering for faf1a007-4997-4ecf-8219-b1cb5de5d876:73a7334b3b154a618f297bec64b10a7b
+[I 08:16:22.493 NotebookApp] Starting buffering for 5fedb3ec-ec8f-41b3-b887-1637f60931bd:aaa2cdf52ffa4b0b87897776f03fa285
+[W 08:24:16.750 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[W 08:24:17.036 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.050000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/analyze_ising.ipynb
+[I 08:24:17.584 NotebookApp] Kernel started: dcc86bdc-8e14-4858-917f-37073d883180, name: jup_env
+[I 08:26:18.109 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 08:26:18.110 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[I 08:28:18.157 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 08:28:18.158 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[I 08:30:18.180 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 08:30:18.180 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[I 08:32:18.107 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 08:32:18.107 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[I 08:40:18.341 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 08:40:18.341 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[W 08:48:48.038 NotebookApp] 404 GET /nbextensions/nbextensions_configurator/config_menu/main.js?v=20220818073331 (127.0.0.1) 2.440000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/plot_val_ge.ipynb
+[W 08:48:50.014 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220818073331 (127.0.0.1) 1.430000ms referer=http://localhost:8890/notebooks/visium_analysis/notebooks/plot_val_ge.ipynb
+[I 08:48:51.839 NotebookApp] Kernel started: a96c9acc-190e-40eb-84d6-a6d36be2c45d, name: jup_env
+[I 08:50:52.275 NotebookApp] Saving file at /visium_analysis/notebooks/plot_val_ge.ipynb
+[I 08:52:53.446 NotebookApp] Saving file at /visium_analysis/notebooks/plot_val_ge.ipynb
+[I 09:32:18.234 NotebookApp] Saving file at /visium_analysis/notebooks/analyze_ising.ipynb
+[W 09:32:18.236 NotebookApp] Notebook visium_analysis/notebooks/analyze_ising.ipynb is not trusted
+[I 09:57:16.463 NotebookApp] Starting buffering for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 09:57:16.464 NotebookApp] Starting buffering for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[I 09:57:18.455 NotebookApp] Restoring connection for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 09:57:18.616 NotebookApp] Restoring connection for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[W 09:58:48.456 NotebookApp] WebSocket ping timeout after 90001 ms.
+[W 09:58:48.617 NotebookApp] WebSocket ping timeout after 90001 ms.
+[I 09:58:53.458 NotebookApp] Starting buffering for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 09:58:53.618 NotebookApp] Starting buffering for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[I 10:02:07.014 NotebookApp] Restoring connection for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[I 10:02:07.192 NotebookApp] Restoring connection for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 11:07:25.663 NotebookApp] Starting buffering for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[I 11:07:25.664 NotebookApp] Starting buffering for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 11:07:27.154 NotebookApp] Restoring connection for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 11:07:27.314 NotebookApp] Restoring connection for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+[W 11:08:57.155 NotebookApp] WebSocket ping timeout after 90000 ms.
+[W 11:08:57.314 NotebookApp] WebSocket ping timeout after 90000 ms.
+[I 11:09:02.158 NotebookApp] Starting buffering for a96c9acc-190e-40eb-84d6-a6d36be2c45d:caafe97068a84b9587e3628ced03bd83
+[I 11:09:02.315 NotebookApp] Starting buffering for dcc86bdc-8e14-4858-917f-37073d883180:84dcdde120fd49b391cf88526eb8f93f
+slurmstepd: error: *** JOB 60492327 ON sh03-16n22 CANCELLED AT 2022-08-18T14:03:40 DUE TO TIME LIMIT ***

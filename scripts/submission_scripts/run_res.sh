@@ -19,10 +19,10 @@ conda activate jup_env
 #DATANAME="V1_Mouse_Kidney"
 #DATANAME="p20190_s003_3_BrainMetastasis"
 #DATANAME="p20190_s004_4_BrainMetastasis"
-#DATANAME="p20218_s001_L1"
+DATANAME="p20218_s001_L1"
 #DATANAME="p20218_s002_L2"
 #DATANAME="p20218_s003_L3"
-DATANAME="p20218_s004_L4"
+#DATANAME="p20218_s004_L4"
 #DATANAME="cta_ucsf-1-5_liver"
 
 #DATANAME="Visium_FFPE_Human_Breast_Cancer"

@@ -335,6 +335,13 @@ Output:
 * `{dataname}_{gene}_{score}_{score2}_quant.png`: plot with three panels where the scores are quantiled (4 quantiles)
 
 ### Peak plots
+This creates ReadZS-style peak plots for each window in a file. Cells are divided up by ReadZS quantiles, and then peaks are plotted. The `window_file` described above can be used as input. Specify the dataname, and make sure the path to the file is specified. Plotting can be run with the [run_plotterfile.sh](scripts/submission_scripts/run_spat_plot.sh) file, specifiying the following parameters:
+
+Input parameters:
+* `DATANAME`: Name to use when saving plots/accessing data
+* `GFF`: gff file for the organism being analyzed
+* `WINDOWFILE`: file with one window per line and no header. These are the windows that will be plotted
+
 
 ## Useful commands
 
